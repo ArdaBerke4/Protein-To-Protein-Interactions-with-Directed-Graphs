@@ -85,7 +85,7 @@ public class PPIGraph {
                     System.out.flush();
                 }
             }
-//
+
             System.out.println("\nInteraction yükleme tamamlandı.");
 
         } catch (Exception e) {

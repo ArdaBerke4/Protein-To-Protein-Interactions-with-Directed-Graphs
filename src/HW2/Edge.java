@@ -5,7 +5,7 @@ public class Edge {
     private String target;
     private double score;
 
-//
+
     public Edge(String source, String target, double score) {
         this.source = source;
         this.target = target;
