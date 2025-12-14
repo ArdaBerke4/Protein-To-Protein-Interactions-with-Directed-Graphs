@@ -19,7 +19,7 @@ public class Protein {
     public String getAnnotation() {
         return annotation;
     }
-//
+
 
     public String getId() {
         return id;

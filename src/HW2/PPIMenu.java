@@ -82,7 +82,7 @@ public class PPIMenu {
 
 
 
-//
+
     private void printMenu() {
         System.out.println("\n==== PPI GRAPH MENU ====");
         System.out.println("1. Load graph");
