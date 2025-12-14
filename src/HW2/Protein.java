@@ -5,7 +5,7 @@ public class Protein {
     private String name;
     private int size;
     private String annotation;
-
+//
     public Protein(String id , String name,int size ,String annotation){
         this.id= id;
         this.name = name;
