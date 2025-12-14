@@ -261,6 +261,7 @@ public class PPIGraph {
                 if(!visited.contains(neighbors)){
                     visited.add(neighbors);
                     queue.add(neighbors);
+                    //
                 }
             }
         }
