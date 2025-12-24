@@ -267,4 +267,88 @@ public class PPIGraph {
         }
 
     }
+    public void mostConfidentPath(String start, String end) {
+
+        Map<String, Double> dist = new HashMap<>();
+        Map<String, String> parent = new HashMap<>();
+
+        PriorityQueue<Node> pq =
+                new PriorityQueue<>(Comparator.comparingDouble(n -> n.cost));
+
+        for (String id : proteins.keySet())
+            dist.put(id, Double.POSITIVE_INFINITY);
+
+        dist.put(start, 0.0);
+        pq.add(new Node(start, 0.0));
+
+        while (!pq.isEmpty()) {
+            Node cur = pq.poll();
+            String u = cur.id;
+
+            if (u.equals(end)) break;
+
+            for (String v : getNeighbors(u)) {
+                double confidence = getEdgeWeight(u, v);
+                double cost = 1000 - confidence;
+
+                double newDist = dist.get(u) + cost;
+
+                if (newDist < dist.get(v)) {
+                    dist.put(v, newDist);
+                    parent.put(v, u);
+                    pq.add(new Node(v, newDist));
+                }
+            }
+        }
+
+        Stack<String> path = new Stack<>();
+        String cur = end;
+
+        while (cur != null) {
+            path.push(cur);
+            cur = parent.get(cur);
+        }
+
+        System.out.println("Most Confident Path:");
+        while (!path.isEmpty())
+            System.out.println(path.pop());
+
+        double totalConfidence = 0;
+        String curre = end;
+
+        while (parent.containsKey(curre)) {
+            String prev = parent.get(curre);
+            totalConfidence += getEdgeWeight(prev, curre);
+            curre = prev;
+        }
+        System.out.println("Cost = " + totalConfidence);
+
+
+
+    }
+
+
+    private double getEdgeWeight(String p1, String p2) {
+        for (Edge e : edges) {
+            if (e.getSource().equals(p1) && e.getTarget().equals(p2)) {
+                return e.getWeight();
+            }
+        }
+        return 0;
+    }
+
+    public void pruneIsolatedVertices() {
+        Iterator<Map.Entry<String, ArrayList<String>>> it = adjList.entrySet().iterator();
+
+        while (it.hasNext()) {
+            Map.Entry<String, ArrayList<String>> entry = it.next();
+            String proteinId = entry.getKey();
+
+            if (entry.getValue().isEmpty()) {
+                it.remove();                 // adjListten sil
+                proteins.remove(proteinId);  // protein listesinden sil
+            }
+        }
+    }
+
 }

@@ -23,6 +23,10 @@ public class Edge {
     public double getScore() {
         return score;
     }
+    public double getWeight() {
+        return score;
+    }
+
 
     @Override
     public String toString() {

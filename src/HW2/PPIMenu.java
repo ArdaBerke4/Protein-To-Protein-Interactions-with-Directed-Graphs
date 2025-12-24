@@ -18,11 +18,12 @@ public class PPIMenu {
             printMenu();
 
             int choice = sc.nextInt();
-            sc.nextLine(); // Enter'ı temizle
+            sc.nextLine(); // enterı temizle
 
             switch (choice) {
                 case 1:
                     loadGraph();
+                    graph.pruneIsolatedVertices();
                     break;
                 case 2:
                     searchProtein();
@@ -31,7 +32,7 @@ public class PPIMenu {
                     checkInteraction();
                     break;
                 case 4:
-
+                    mostConfidentPath();
                     break;
                 case 5:
                     showMetrics();
@@ -140,8 +141,19 @@ public class PPIMenu {
             System.out.println("\nDevam etmek icin Enter'a basin...");
             sc.nextLine();
         }
+    private void mostConfidentPath() {
+        System.out.print("Baslangic protein ID: ");
+        String start = sc.nextLine();
 
+        System.out.print("Bitis protein ID: ");
+        String end = sc.nextLine();
+
+        graph.mostConfidentPath(start, end);
     }
+
+
+
+}
 
 
 
